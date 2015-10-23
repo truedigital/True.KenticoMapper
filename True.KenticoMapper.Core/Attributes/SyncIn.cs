@@ -14,19 +14,6 @@ namespace True.KenticoMapper.Core.Attributes
             Name = columnName;
         }
     }   
-    
-    /// <summary>
-    /// Attribute that should be used to decorate a type that should read information in from the database
-    /// </summary>
-    public class SyncInImage : Attribute, INamedSyncIn
-    {
-        public string Name { get; }
-
-        public SyncInImage(string columnName)
-        {
-            Name = columnName;
-        }
-    }
 
     /// <summary>
     /// Attribute that should be used to decorate a type that should read id information in from the database
@@ -57,5 +44,4 @@ namespace True.KenticoMapper.Core.Attributes
     /// Attribute that should be used to decorate a type that should read document class name information in from the database
     /// </summary>
     public class SyncInNodeClassName : Attribute, ISyncIn { }
-
 }
