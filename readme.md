@@ -33,24 +33,7 @@ These assemblies have been built against Kentico v8.2 under Visual Studio 2015.
 
 ## Custom Table Mapping
 
-		[SyncIgnore]
-Tells the mapper to ignore this property
-
-		[SyncInId]
-Tells the mapper to read in the node id the type that this attribute decorates MUST be an int
-
-		[SyncInGuid]
-Tells the mapper to read in the node id the type that this attribute decorates MUST be a Guid
-
-		[SyncIn("column_name")]
-Tells the mapper to read from the column_name value, the type that this attribute decorates MUST be the C# equivalent of the SQL type, including nullable types
-
-		[SyncOut("column_name")]
-Tells the mapper to write to the column_name value, the type that this attribute decorates MUST be the C# equivalent of the SQL type, including nullable types
-
-		[SyncInOut("column_name")]
-Tells the mapper to read from and write to the column_name value, the type that this attribute decorates MUST be the C# equivalent of the SQL type, including nullable types
-
+The CustomTableMapper can both read from and write to an associated custom table, if the correct attribute decorations are used
 
 1. Create a custom class that you want to model a custom table
 
@@ -60,7 +43,7 @@ Tells the mapper to read from and write to the column_name value, the type that 
 			public string FirstName { get; set; }
 			public string SecondName { get; set; }
 			public string Title { get; set; }
-			public int Age { get; set; }
+			public int? Age { get; set; }
 		}
 		
 2. Decorate all properties with the appropriate attributes
@@ -80,7 +63,7 @@ Tells the mapper to read from and write to the column_name value, the type that 
 			public string Title { get; set; }
 			
 			[SyncInOut("Age")]
-			public int Age { get; set; }
+			public int? Age { get; set; }
 		}
 		
 3. Use the CustomTableMapper to allow you to interact with a custom table via your custom objects
@@ -104,11 +87,95 @@ Tells the mapper to read from and write to the column_name value, the type that 
 		
 ## Custom Table Attibutes
 
+		[SyncIgnore]
+Tells the mapper to ignore this property
+
+		[SyncInId]
+Tells the mapper to read in the node id the type that this attribute decorates MUST be an int
+
+		[SyncInGuid]
+Tells the mapper to read in the node id the type that this attribute decorates MUST be a Guid
+
+		[SyncIn("column_name")]
+Tells the mapper to read from the column_name value, the type that this attribute decorates MUST be the C# equivalent of the SQL type, including nullable types
+
+		[SyncOut("column_name")]
+Tells the mapper that it can write to the column_name value, the type that this attribute decorates MUST be the C# equivalent of the SQL type, including nullable types
+
+		[SyncInOut("column_name")]
+Tells the mapper that it can read from and write to the column_name value, the type that this attribute decorates MUST be the C# equivalent of the SQL type, including nullable types
 
 
 ## Tree Node Mapping
 
-NB. The TreeNodeMapper is currently only reads from TreeNodes, it cannot write to them. 
+NB. The TreeNodeMapper currently only reads from TreeNodes, it cannot write to them. 
+
+1. Create a custom class that you want to model a custom table
+    
+		public interface IBook
+		{
+			int BookId { get; set; }
+			IAuthor Author { get; set; }
+			string ISBN { get; set; }
+		}
+		
+		public class Book : IBook
+		{
+			public int BookId { get; set; }
+			public IAuthor Author { get; set; }
+			public string ISBN { get; set; }
+		}
+		
+		public interface IAuthor
+		{
+			string FirstName { get; set; }
+			string LastName { get; set; }
+			string Summary { get; set; }
+		}
+
+		public class Author : IAuthor
+		{
+			public string FirstName { get; set; }
+			public string LastName { get; set; }
+			public string Summary { get; set; }
+		}
+		
+2. Decorate all properties with the appropriate attributes
+	
+		public class Book : IBook
+		{
+			[SyncInId]
+			public int BookId { get; set; }
+
+			[SyncInComplex("Author", typeof (ComplexBuilder<Author, IAuthor>))]
+			public IAuthor Author { get; set; }
+
+			[SyncIn("ISBN")]
+			public string ISBN { get; set; }
+		}
+
+		public class Author : IAuthor
+		{
+			[SyncIn("FirstName")]
+			public string FirstName { get; set; }
+
+			[SyncIn("LastName")]
+			public string LastName { get; set; }
+
+			[SyncIn("Summary")]
+			public string Summary { get; set; }
+		}
+		
+3. Use the TreeNodeMapper to allow you to interact with a custom table via your custom objects
+
+		public class BookProvider
+		{
+			public Book GetBook(TreeNode node)
+			{
+				var provider = new TreeNodeMapper();
+				return provider.Create<Book>(new KenticoTreeNode(node));
+			}
+		}
 
 ## Tree Node Attributes
 
@@ -149,7 +216,7 @@ Tells the mapper to create an object of type IEnumerable<TInterface>  and map it
 Tells the mapper to create an object of type IEnumerable<TInterface> and map its children out as instances of type TInterface
 	
 		[SyncInChild(typeof(ChildBuilder<T, TInterface>))] 
-Singular case of the above
+Tells the mapper to create an object of type TInterface and map its first child out as an instance of type TInterface
 		
 ## Changelog
 
