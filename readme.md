@@ -1,7 +1,8 @@
 # Kentico Mapper
 
 A set of assemblies to simplify mapping from Kentico TreeNode and CustomTable objects to your own custom types. 
-These assemblies have been built against Kentico v8.2 under Visual Studio 2015.  
+These assemblies have been built against Kentico v8.2 under Visual Studio 2015. 
+I cannot guarantee functionality will work against earlier versions of Kentico, although development of these components did start against Kentico v7.0 .
 
 ## Contents
 
