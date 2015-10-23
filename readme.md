@@ -30,4 +30,4 @@ You can keep up-to-date with the changes that we have made via our [releases pag
 
 ## License
 
-Code released under the [MIT license](https://github.com/truedigital/True.KenticoMapper/blob/develop/LICENSE). Documentation released under [Creative Commons](http://creativecommons.org/licenses/by-sa/4.0/).
+Code released under the [MIT license](https://github.com/truedigital/True.KenticoMapper/blob/master/LICENSE). Documentation released under [Creative Commons](http://creativecommons.org/licenses/by-sa/4.0/).
