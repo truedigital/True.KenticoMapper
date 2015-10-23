@@ -167,7 +167,7 @@ NB. The TreeNodeMapper currently only reads from TreeNodes, it cannot write to t
 			public string Summary { get; set; }
 		}
 		
-3. Use the TreeNodeMapper to allow you to interact with a custom table via your custom objects
+3. Use the TreeNodeMapper to allow you to read information from a tree node and related nodes based on the attribute decorators used on your model
 
 		public class BookProvider
 		{
@@ -199,7 +199,7 @@ Tells the mapper to read in the relative url, the type that this attribute decor
 Tells the mapper to read in the node class name, the type that this attribute decorates MUST be a string
 
 		[SyncInCollection("column_name", delimiter : "|")]
-Tells the mapper to create an object of type IEnumerable<string> split on the delimiter from the value stored in column_name
+Tells the mapper to create an object of type IEnumerable<string> and map its fields from the string delimited collection of values stored in column_name
 
 		[SyncIn("column_name")]
 Tells the mapper to read from the column_name value, the type that this attribute decorates MUST be the C# equivalent of the SQL type, including nullable types
@@ -210,8 +210,8 @@ Tells the mapper to create an object of type TInterface and map its fields from 
 		[SyncInComplex("column_name", typeof(ComplexBuilder<T, TInterface>))] 
 Tells the mapper to create an object of type TInterface and map its fields from the tree node of the node id stored in column_name
 
-		[SyncInComplexCollection("column_name", typeof(ComplexCollectionBuilder<T, TInterface>))] 
-Tells the mapper to create an object of type IEnumerable<TInterface>  and map its fields from the list of tree nodes of the of the node ids stored in column_name
+		[SyncInComplexCollection("column_name", typeof(ComplexCollectionBuilder<T, TInterface>), delimiter : "|")] 
+Tells the mapper to create an object of type IEnumerable<TInterface> and map its fields from the string delimited collection of node ids stored in column_name
 
 		[SyncInChildren(typeof (ChildrenBuilder<T, TInterface>))] 
 Tells the mapper to create an object of type IEnumerable<TInterface> and map its children out as instances of type TInterface
