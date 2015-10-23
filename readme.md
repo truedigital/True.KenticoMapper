@@ -23,3 +23,11 @@ These assemblies have been built against Kentico v8.2 under Visual Studio 2015.
 2. Install:
 
         Add the assemblies to your Kentico v8.2 project
+		
+## Changelog
+
+You can keep up-to-date with the changes that we have made via our [releases page](https://github.com/truedigital/True.KenticoMapper/releases).
+
+## License
+
+Code released under the [MIT license](https://github.com/truedigital/True.KenticoMapper/blob/develop/LICENSE). Documentation released under [Creative Commons](http://creativecommons.org/licenses/by-sa/4.0/).
