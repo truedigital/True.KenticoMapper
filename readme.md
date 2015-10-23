@@ -92,32 +92,33 @@ These assemblies have been built against Kentico v8.2 under Visual Studio 2015.
 NB. The TreeNodeMapper is currently only reads from TreeNodes, it cannot write to them. 
 
 ## Tree Node Attributes
+
 		[SyncIgnore]
-- Tells the mapper to ignore this property
+	Tells the mapper to ignore this property
 
 		[SyncInId]
-- Tells the mapper to read in the tree node id the type that this attribute decorates MUST be an int
+	Tells the mapper to read in the tree node id the type that this attribute decorates MUST be an int
 
 		[SyncInGuid]
-- Tells the mapper to read in the tree node guid, the type that this attribute decorates MUST be a Guid
+	Tells the mapper to read in the tree node guid, the type that this attribute decorates MUST be a Guid
 
 		[SyncIn("column_name")]
-- Tells the mapper to read the column_name value, the type that this attribute decorates MUST be the C# equivalent of the SQL type, including nullable types
+	Tells the mapper to read the column_name value, the type that this attribute decorates MUST be the C# equivalent of the SQL type, including nullable types
 
-		[SyncInComplex(typeof (ComplexBuilder<T, TInterface>))] 
-- Tells the mapper to create an object of type TInterface and map its fields from the current tree node
+		[SyncInComplex(typeof(ComplexBuilder<T, TInterface>))] 
+	Tells the mapper to create an object of type TInterface and map its fields from the current tree node
 
-		[SyncInComplex("column_name", typeof (ComplexBuilder<T, TInterface>))] 
-- Tells the mapper to create an object of type TInterface and map its fields from the tree node of the node id stored in the column_name
+		[SyncInComplex("column_name", typeof(ComplexBuilder<T, TInterface>))] 
+	Tells the mapper to create an object of type TInterface and map its fields from the tree node of the node id stored in the column_name
 
-		[SyncInComplexCollection("column_name", typeof (ComplexCollectionBuilder<T, TInterface>))] 
-- Tells the mapper to create an object of type IEnumerable<TInterface>  and map its fields from the list of tree nodes of the of the node ids stored in the column_name
+		[SyncInComplexCollection("column_name", typeof(ComplexCollectionBuilder<T, TInterface>))] 
+	Tells the mapper to create an object of type IEnumerable<TInterface>  and map its fields from the list of tree nodes of the of the node ids stored in the column_name
 
 		[SyncInChildren(typeof (ChildrenBuilder<T, TInterface>))] 
-- Tells the mapper to create an object of type IEnumerable<TInterface> and map its children out as instances of type TInterface
+	Tells the mapper to create an object of type IEnumerable<TInterface> and map its children out as instances of type TInterface
 		
-		[SyncInChild(typeof (Childuilder<T, TInterface>))] 
-- Singular case of the above
+		[SyncInChild(typeof(ChildBuilder<T, TInterface>))] 
+	Singular case of the above
 		
 ## Changelog
 
