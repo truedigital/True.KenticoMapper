@@ -2,7 +2,7 @@
 
 A set of assemblies to simplify mapping from Kentico TreeNode and CustomTable objects to your own custom types. 
 These assemblies have been built against Kentico v8.2 under Visual Studio 2015. 
-I cannot guarantee functionality demonstrated below will work against earlier versions of Kentico, although development of these components did start begin on Kentico v7.0.
+I cannot guarantee functionality demonstrated below will work against earlier versions of Kentico, although development of these components did begin on Kentico v7.0.
 
 ## Contents
 
